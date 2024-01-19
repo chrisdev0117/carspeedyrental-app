@@ -1,0 +1,30 @@
+.footer {
+    height: 240px;
+    background-color: black;
+    display: flex;
+    text-align: center;
+    color: #ffffffb2;
+    vertical-align: center;
+    padding-top: 50px;
+    .about-app {
+      align-items: center;
+      width: 50%;
+      h2 {
+        color: white;
+        font-size: 27px;
+        span {
+          font-size: 20px;
+          color: #ff992e;
+        }
+      }
+    }
+    .contact-info {
+      width: 50%;
+      h2 {
+        color: white;
+      }
+      span {
+        color: #2c3e50;
+      }
+    }
+  }
