@@ -7,7 +7,11 @@ export default function Header({ type }) {
   return (
     <div className="mt-24">
       <div className="flex justify-center">
-        <img src="/img/background.png" alt="Car" className="h-36" />
+        <img
+          src="http://localhost:8000/api/v1/car/file/background.png"
+          alt="Car"
+          className="h-36"
+        />
       </div>
       <h2 className="mt-6 text-3xl font-extrabold text-center text-gray-900">
         {auth_header.at(type).title}

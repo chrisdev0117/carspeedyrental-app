@@ -17,8 +17,10 @@ export default function SignUp() {
     setSignupState({ ...signupState, [e.target.id]: e.target.value });
 
   const handleSubmit = (e) => {
-    e.preventDefault();
+    console.log("signup state");
     console.log(signupState);
+    e.preventDefault();
+
     createAccount();
   };
 
@@ -27,10 +29,11 @@ export default function SignUp() {
     AuthService.register(
       signupState["username"],
       signupState["email-address"],
+      signupState["phone"],
       signupState["password"]
     ).then(
       (response) => {
-        alert("Successfully regestered!");
+        console.log(response);
         navigate("/signin");
       },
       (error) => {

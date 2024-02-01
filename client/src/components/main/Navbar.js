@@ -4,41 +4,66 @@ import { Link } from "react-router-dom";
 import AuthService from "../../services/auth.service";
 import Sidebar from "./Sidebar";
 
-export default function Navbar({ currentUser }) {
+export default function Navbar({ currentUser, onSectionClick }) {
   const [showSideBar, setShowSideBar] = useState();
   const [showDropList, setShowDropList] = useState(false);
   const navigate = useNavigate();
-
-  const links = [
+  const user_links = [
     {
       name: "Home",
-      path: "#booking-section",
+      path: "/",
       key: "booking-section",
+      pos: onSectionClick.section1,
     },
     {
       name: "Pricing",
-      path: "#prices-section",
+      path: "/",
       key: "prices-section",
+      pos: onSectionClick.section2,
     },
     {
       name: "About",
-      path: "#aboutus-section",
+      path: "/",
       key: "aboutus-section",
+      pos: onSectionClick.section3,
     },
     {
       name: "Contact",
-      path: "#contact-section",
+      path: "/",
       key: "contact-section",
+      pos: onSectionClick.section4,
+    },
+  ];
+
+  const admin_links = [
+    {
+      name: "Users",
+      path: "/users",
+      key: "admin_users",
+    },
+    {
+      name: "Cars",
+      path: "/cars",
+      key: "admin_cars",
     },
   ];
   function closeSideBar() {
     setShowSideBar(false);
   }
+
+  const scrollToSection = (ref) => {
+    console.log(ref);
+    window.scrollTo({
+      top: ref.current.offsetTop,
+      behavior: "smooth",
+    });
+  };
+
   return (
     <>
-      <div className=" bg-[#808080] sticky top-0 z-10 shadow-md shadow-[#808080]">
-        <section className="flex items-center justify-between max-w-5xl p-4 mx-auto">
-          <a href="/" key="logo" className="text-xl font-extrabold">
+      <div className=" bg-blue-100 sticky top-0 z-10 shadow-md shadow-[#808080]">
+        <section className="flex items-center justify-between max-w-5xl px-4 mx-auto">
+          <a href="/" key="logo" className="py-4 text-xl font-extrabold">
             CAR<span className="text-orange-400">SPEEDYRENTAL</span>
           </a>
           <button
@@ -50,18 +75,26 @@ export default function Navbar({ currentUser }) {
           </button>
 
           <div className="hidden space-x-4 md:flex">
-            {links.map((link, index) => (
+            {(currentUser && currentUser.role === "admin"
+              ? admin_links
+              : window.location.hash === ""
+              ? user_links
+              : []
+            ).map((link, index) => (
               //<button onClick={() => navigate(link.path)}>{link.name}</button>
               <button
                 onClick={() => {
-                  navigate("/");
+                  if (link.path === "/") {
+                    scrollToSection(link.pos);
+                  } else navigate(link.path);
                 }}
                 key={link.name}
+                className="inline-block h-full text-gray-600 "
               >
                 {link.name}
               </button>
             ))}
-            {currentUser ? (
+            {currentUser && currentUser.email ? (
               <>
                 <div className="relative inline-block text-left">
                   <button
@@ -130,7 +163,15 @@ export default function Navbar({ currentUser }) {
         </section>
       </div>
       {showSideBar && (
-        <Sidebar close={closeSideBar} links={links} currentUser={currentUser} />
+        <Sidebar
+          close={closeSideBar}
+          links={
+            currentUser && currentUser.role === "admin"
+              ? admin_links
+              : user_links
+          }
+          currentUser={currentUser}
+        />
       )}
     </>
   );

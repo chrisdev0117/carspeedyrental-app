@@ -3,6 +3,14 @@ import axios from "axios";
 const API_AUTH_URL = "http://localhost:8000/api/v1/auth/";
 
 class AuthService {
+  static async getAllUsers() {
+    return axios.get(API_AUTH_URL + `all`).then((e) => {
+      console.log("22222222");
+      console.log(e.data);
+      return e.data;
+    });
+  }
+
   static login(email, password) {
     console.log(email, password);
 
@@ -25,18 +33,29 @@ class AuthService {
     localStorage.removeItem("user");
   }
 
-  static register(username, email, password) {
+  static register(username, email, phone, password) {
     console.log(username);
-    alert(username);
     return axios.post(API_AUTH_URL + "signup", {
       username,
       email,
+      phone,
       password,
     });
   }
 
   static getCurrentUser() {
     return JSON.parse(localStorage.getItem("user"));
+  }
+
+  static remove(id) {
+    console.log(id);
+    return axios
+      .delete(API_AUTH_URL + `delete/${id}`, {
+        id,
+      })
+      .then((response) => {
+        console.log(response);
+      });
   }
 }
 

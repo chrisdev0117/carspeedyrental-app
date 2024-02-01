@@ -59,7 +59,15 @@ export default function PayDetail() {
         <input type="checkbox" id="agree" />
         <label htmlFor="agree">
           {" "}
-          I agree <a href="!#">Terms and Conditions</a>
+          I agree{" "}
+          <a
+            href="http://localhost:8000/api/v1/car/file/terms&conditions.pdf"
+            target="_blank"
+            rel="noreferrer"
+            className="underline"
+          >
+            Terms and Conditions
+          </a>
         </label>
       </div>
       <button

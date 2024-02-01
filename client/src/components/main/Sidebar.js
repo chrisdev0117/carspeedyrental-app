@@ -10,9 +10,9 @@ export default function Sidebar({ links, close, currentUser }) {
     >
       {links.map((link) => (
         <button
-          className="block py-3 text-xl text-center hover:border-l-4 border-l-orange-400 hover:bg-slate-100"
+          className="block w-full py-3 mx-auto text-xl text-center hover:border-l-4 border-l-orange-400 hover:bg-slate-100"
           onClick={() => {
-            navigate("/");
+            navigate(link.path);
           }}
         >
           {link.name}
@@ -27,7 +27,7 @@ export default function Sidebar({ links, close, currentUser }) {
           id="menu-item-3"
           onClick={() => {
             AuthService.logout();
-            navigate("/sign");
+            navigate("/signin");
             window.location.reload();
           }}
         >

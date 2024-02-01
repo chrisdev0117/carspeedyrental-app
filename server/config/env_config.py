@@ -1,6 +1,7 @@
 API_VERSION_STR: str = "/api/v1"
 API_AUTH_STR: str= API_VERSION_STR + "/auth"
 API_CAR_STR: str= API_VERSION_STR + "/car"
+API_ORDER_STR: str= API_VERSION_STR + "/order"
 
 DATABASE_URL: str = "postgresql://postgres:221418117@db:5432/testdb"
 

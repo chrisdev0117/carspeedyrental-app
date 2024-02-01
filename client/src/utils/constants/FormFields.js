@@ -42,6 +42,18 @@ const signupFields = [
     isRequired: true,
     placeholder: "Email address",
   },
+
+  {
+    labelText: "Phone number",
+    labelFor: "phone-number",
+    id: "phone",
+    name: "phone",
+    type: "phone",
+    autoComplete: "phone",
+    isRequired: true,
+    placeholder: "Phone number",
+  },
+
   {
     labelText: "Password",
     labelFor: "password",
@@ -116,7 +128,7 @@ const reserveFields = [
     labelFor: "email-address",
     id: "email-address",
     name: "email",
-    type: "email",
+    type: "text",
     autoComplete: "email",
     isRequired: true,
     placeholder: "Email address",

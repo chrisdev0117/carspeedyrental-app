@@ -1,16 +1,20 @@
 import React from "react";
 
-export default function Pricing({ carData }) {
+export default function Pricing({ carData, sectionref }) {
   return (
     <>
-      <section id="prices-section" className="px-8 text-center py-11">
+      <section
+        id="prices-section"
+        className="px-8 text-center pt-11"
+        ref={sectionref}
+      >
         <h1 className="text-3xl font-semibold">Our Prices</h1>
         <h3 className="mt-6 text-blue-500 font-bold text-1xl animate-[zoom-in-out_2s_infinite] mx-auto w-1/3">
           <span>
             Go unlimited by purchasing unlimited mileage only for $13 a day
           </span>
         </h3>
-        <div className="max-w-5xl mx-auto mt-8 ">
+        <div className="max-w-5xl mx-auto mt-8 shadow-md">
           <div className="table-header-group">
             <div className="table-cell border-b-2 border-gray-400">&nbsp;</div>
             <div className="table-cell border-b-2 border-gray-400">&nbsp;</div>
@@ -41,7 +45,7 @@ export default function Pricing({ carData }) {
             <div className="table-row-group" key={index}>
               <div className="table-cell p-4 border-b-2 border-gray-400">
                 <img
-                  src={car.img_path}
+                  src={`http://localhost:8000/api/v1/car/file/${car.img_path}`}
                   alt={car.carname}
                   className="w-[200px] h-[131px]"
                 />

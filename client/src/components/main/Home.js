@@ -1,15 +1,32 @@
-import Modal from "./Modal";
+import { useEffect, useState } from "react";
 
-export default function Home({ carData }) {
+import RentalCarModal from "../modals/RentalCarModal";
+
+export default function Home({ carData, sectionref }) {
+  const [startDate, setStartDate] = useState(
+    new Date().toISOString().slice(0, 10)
+  );
+  const [endDate, setEndDate] = useState(
+    new Date(new Date().getTime() + 5 * 24 * 60 * 60 * 1000)
+      .toISOString()
+      .slice(0, 10)
+  );
+  useEffect(() => {
+    //console.log(startDate);
+    // console.log(endDate);
+  }, []);
   return (
     <>
       <div
         id="booking-section"
-        style={{ backgroundImage: `url('/img/background.png')` }}
-        className="bg-[#808080] py-11 px-4"
+        style={{
+          backgroundImage: `url("http://localhost:8000/api/v1/car/file/background.png")`,
+        }}
+        className="px-4 bg-blue-100 py-11"
+        ref={sectionref}
       >
         <div className="flex justify-center max-w-5xl mx-auto">
-          <div className="bg-blue-500 h-[500px] pt-8 items-center justify-center text-center w-full max-w-[460px] md:w-1/2 mx-2 md:mx-0 rounded-l-lg  shadow-lg shadow-black">
+          <div className="bg-purple-500 h-[500px] pt-8 items-center justify-center text-center w-full max-w-[460px] md:w-1/2 mx-2 md:mx-0 rounded-l-lg  shadow-lg shadow-black">
             <h2 className="pb-2 text-2xl font-bold text-white">
               Make Your Ride
             </h2>
@@ -35,7 +52,9 @@ export default function Home({ carData }) {
                 type="date"
                 className="block w-full rounded-md border-0 px-1.5 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300"
                 min={new Date().toISOString().slice(0, 10)}
-                defaultValue={new Date().toISOString().slice(0, 10)}
+                max={endDate}
+                value={startDate}
+                onChange={(e) => setStartDate(e.target.value)}
               />
               <input
                 type="time"
@@ -49,12 +68,9 @@ export default function Home({ carData }) {
               <input
                 type="date"
                 className="block w-full rounded-md border-0 px-1.5 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300"
-                min={new Date().toISOString().slice(0, 10)}
-                defaultValue={new Date(
-                  new Date().getTime() + 5 * 24 * 60 * 60 * 1000
-                )
-                  .toISOString()
-                  .slice(0, 10)}
+                min={startDate}
+                value={endDate}
+                onChange={(e) => setEndDate(e.target.value)}
               />
               <input
                 type="time"
@@ -73,18 +89,22 @@ export default function Home({ carData }) {
                 <option>24</option>
                 <option>+25</option>
               </select>
-              <Modal carData={carData} />
+              <RentalCarModal
+                carData={carData}
+                startDate={startDate}
+                endDate={endDate}
+              />
             </div>
           </div>
 
-          <div className="flex-col w-1/2 bg-white h-[500px] items-center justify-center text-center hidden md:flex  rounded-r-lg  shadow-lg shadow-black">
+          <div className="flex-col w-1/2 bg-gray-200 h-[500px] items-center justify-center text-center hidden md:flex  rounded-r-lg  shadow-lg shadow-black">
             <h2 className="pb-2 mb-8 text-2xl font-bold text-gray-700">
               Call us reserve your car now
             </h2>
             <div className="flex justify-center px-5 mx-auto mb-5 gap-7">
               <div>
                 <img
-                  src="/img/long_term.png"
+                  src="http://localhost:8000/api/v1/car/file/long_term.png"
                   alt="long term"
                   className="mb-5 size-36"
                 />
@@ -92,7 +112,7 @@ export default function Home({ carData }) {
               </div>
               <div>
                 <img
-                  src="/img/daily.png"
+                  src="http://localhost:8000/api/v1/car/file/daily.png"
                   alt="daily"
                   className="mb-5 size-36"
                 />

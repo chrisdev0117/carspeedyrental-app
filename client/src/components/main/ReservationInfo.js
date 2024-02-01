@@ -1,14 +1,22 @@
 import { reserveFields } from "../../utils/constants/FormFields";
 import Input from "../common/Input";
 
+import { Elements } from "@stripe/react-stripe-js";
+import { loadStripe } from "@stripe/stripe-js";
+import CheckoutForm from "./CheckoutForm";
+
+const stripePromise = loadStripe(
+  "pk_test_51Odyf8Edv3TCDl3hlFwXcV6hDLGbTYaz0kO6N3H3z3FwKAlj8Qxr6xfHEMoxF2MXedAg6QDDscZDCkIA1Pe01OUe004yrgcAoI"
+);
+
 export default function ReservationInfo() {
   const fields = reserveFields;
   return (
     <div className="w-full px-4 py-4 ">
       <h1 className="text-2xl">Your Information</h1>
-      {fields.map((field) =>
+      {fields.map((field, index) =>
         field.type === "phone" ? (
-          <div>
+          <div key={index}>
             <div className="relative">
               <div className="absolute inset-y-0 start-0 top-0 flex items-center ps-3.5 pointer-events-none">
                 <svg
@@ -33,7 +41,7 @@ export default function ReservationInfo() {
             </div>
           </div>
         ) : field.type === "card" ? (
-          <div>
+          <div key={index}>
             <div className="flex mb-5">
               <div className="mr-5">
                 <input type="radio" id="credit" className="mr-2" name="card" />
@@ -45,74 +53,9 @@ export default function ReservationInfo() {
               </div>
             </div>
 
-            <label className="relative flex flex-col w-full">
-              <input
-                className="py-2 pl-12 pr-2 placeholder-gray-300 border-2 border-gray-200 rounded-md peer"
-                type="text"
-                name="card_number"
-                placeholder="0000 0000 0000"
-              />
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                className="absolute bottom-0 left-0 -mb-0.5 transform translate-x-1/2 -translate-y-1/2 text-black peer-placeholder-shown:text-gray-300 h-6 w-6"
-                fill="none"
-                viewBox="0 0 24 24"
-                stroke="currentColor"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth="2"
-                  d="M3 10h18M7 15h1m4 0h1m-7 4h12a3 3 0 003-3V8a3 3 0 00-3-3H6a3 3 0 00-3 3v8a3 3 0 003 3z"
-                />
-              </svg>
-            </label>
-
-            <label className="relative flex flex-col flex-1 mt-4">
-              <input
-                className="py-2 pl-12 pr-2 placeholder-gray-300 border-2 border-gray-200 rounded-md peer"
-                type="text"
-                name="expire_date"
-                placeholder="MM/YY"
-              />
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                className="absolute bottom-0 left-0 -mb-0.5 transform translate-x-1/2 -translate-y-1/2 text-black peer-placeholder-shown:text-gray-300 h-6 w-6"
-                fill="none"
-                viewBox="0 0 24 24"
-                stroke="currentColor"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth="2"
-                  d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"
-                />
-              </svg>
-            </label>
-
-            <label className="relative flex flex-col flex-1 mt-4">
-              <input
-                className="py-2 pl-12 pr-2 placeholder-gray-300 border-2 border-gray-200 rounded-md peer"
-                type="text"
-                name="card_cvc"
-                placeholder="&bull;&bull;&bull;"
-              />
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                className="absolute bottom-0 left-0 -mb-0.5 transform translate-x-1/2 -translate-y-1/2 text-black peer-placeholder-shown:text-gray-300 h-6 w-6"
-                fill="none"
-                viewBox="0 0 24 24"
-                stroke="currentColor"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth="2"
-                  d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"
-                />
-              </svg>
-            </label>
+            <Elements stripe={stripePromise}>
+              <CheckoutForm />
+            </Elements>
           </div>
         ) : (
           <Input

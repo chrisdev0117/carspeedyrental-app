@@ -6,7 +6,11 @@ export default function ReservedCar() {
       </h1>
       <p className="my-3">Nissan Versa Note</p>
       <p className="my-3">Or Similar</p>
-      <img src="/img/cars/2.png" alt="asdf" className="mx-auto my-3 w-28" />
+      <img
+        src="http://localhost:8000/api/v1/car/file/123123123.png"
+        alt="asdf"
+        className="mx-auto my-3 w-28"
+      />
       <div className="flex justify-between">
         <div className="w-1/2 p-5 border-b-2 border-r-2 border-black border-dotted">
           <p>Pick-up</p>

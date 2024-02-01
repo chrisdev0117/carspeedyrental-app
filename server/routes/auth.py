@@ -1,4 +1,5 @@
 from fastapi import APIRouter, HTTPException, Depends, Form
+from fastapi_pagination import Page, add_pagination, paginate
 from typing import List, Union, Any
 from sqlalchemy.orm import Session
 from starlette import status
@@ -7,7 +8,8 @@ from datetime import timedelta, datetime
 from jose import jwt
 
 from server.models.user import User
-from server.schemas.user import UserLoginSchema, UserRegisterSchema, UserResponseSchema, UserTokenSchema
+from server.models.car import Car
+from server.schemas.user import UserLoginSchema, UserRegisterSchema, UserResponseSchema, UserTokenSchema, UserReservationSchema
 from server.config.env_config import ACCESS_TOKEN_EXPIRE_MINUTES, SECRET_KEY, ALGORITHM
 from server.config.db_config import get_db
 from server.utils.auth import hashed_password, verify_password
@@ -40,17 +42,20 @@ async def root():
         "message": "Welcome to the auth router!"
     }
 
-@auth_router.get('/users', response_model=List[UserResponseSchema])
+@auth_router.get('/all', response_model=Page[UserResponseSchema])
 def get_users(db: Session = Depends(get_db)):
-    users = db.query(User).all()
-    return  users
+    users = db.query(User).filter(User.email != "None").all()
+
+    return  paginate(users)
 
 @auth_router.post("/signup", status_code=status.HTTP_201_CREATED, response_model=UserResponseSchema)
 async def signup_user( user: UserRegisterSchema, db: Session = Depends(get_db)):
     new_user = User(
         username=user.username,
         email=user.email,
+        phone=user.phone,
         password=hashed_password(user.password),
+        role="user"
     )
     db.add(new_user)
     db.commit()
@@ -66,7 +71,26 @@ async def signin_user( user: UserLoginSchema, db: Session = Depends(get_db)):
     access_token_expires = timedelta(minutes=ACCESS_TOKEN_EXPIRE_MINUTES)
     access_token = create_access_token(user.id, expires_delta=access_token_expires)
     return {
+        "id": user.id,
         "username": user.username,
+        "email": user.email,
+        "phone": user.phone,
         "access_token": access_token,
         "token_type": "fastapi",
+        "role": user.role,
     }
+
+@auth_router.get('/reservation', response_model=UserResponseSchema)
+def get_users(email: str, db: Session = Depends(get_db)):
+    user = db.query(User).filter(User.email == email).first()
+    return user
+
+@auth_router.delete("/delete/{id}")
+async def delete_user(id: int, db: Session = Depends(get_db)):
+    delete_user: User = db.get(User, id)
+    if delete_user:
+        db.delete(delete_user)
+        db.commit()
+    else:
+        raise HTTPException(status_code=404, detail=f"User with id={id} not found.")
+    return delete_user

@@ -1,11 +1,12 @@
 import MapPosition from "./MapPosition";
 
-export default function About() {
+export default function About({ sectionref }) {
   return (
     <>
       <section
         id="aboutus-section"
         className="flex-col max-w-5xl px-4 py-5 mx-auto bg-orange-400 md:flex md:flex-row"
+        ref={sectionref}
       >
         <div className="z-10 flex w-2/3 ml-3 bg-red-100 md:size-96 aspect-square md:ml-10 sm:ml-8">
           <MapPosition />

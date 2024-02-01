@@ -1,10 +1,32 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
+import CarService from "../../services/car.service";
+import { useState } from "react";
 
-export default function Modal({ carData }) {
+export default function RentalCarModal({ startDate, endDate }) {
   const [showModal, setShowModal] = React.useState(false);
   const [currentCarIndex, setCurrentCarIndex] = React.useState(0);
   const navigate = useNavigate();
+  const [carData, setCarData] = React.useState([]);
+  const days = Math.round(
+    (new Date(endDate).getTime() - new Date(startDate).getTime()) /
+      (1000 * 3600 * 24)
+  );
+  const [rentalCost, setRentalCost] = useState(0);
+  const [taxesFees, setTaxesFees] = useState(0);
+  useEffect(() => {
+    //setCarData(CarService.getAllCars().json());
+    console.log("here");
+    const fetchCars = async () => {
+      const response = await fetch(`http://localhost:8000/api/v1/car/allcars`);
+      const cars = await response.json();
+      setCarData(cars);
+      console.log(cars);
+      setRentalCost(cars[currentCarIndex].per_day * days);
+      setTaxesFees(cars[currentCarIndex].per_day * days * 0.532);
+    };
+    fetchCars();
+  }, [currentCarIndex]);
   return (
     <>
       <button
@@ -41,8 +63,9 @@ export default function Modal({ carData }) {
                       <div
                         className={`p-2 m-2 border-2 rounded-md h-36 cursor-pointer ${
                           currentCarIndex === index && "bg-blue-500"
-                        }`}
+                        } `}
                         onClick={() => setCurrentCarIndex(index)}
+                        key={index}
                       >
                         <span
                           className={`${
@@ -52,9 +75,12 @@ export default function Modal({ carData }) {
                           {car.carname}
                         </span>
                         <img
-                          src={car.img_path}
+                          src={
+                            "http://localhost:8000/api/v1/car/file/" +
+                            car.img_path
+                          }
                           alt={car.carname}
-                          className="object-cover"
+                          className="object-contain h-24 mx-auto "
                         />
                       </div>
                     ))}
@@ -69,7 +95,7 @@ export default function Modal({ carData }) {
                       <br />
 
                       <span className="float-left">Days:</span>
-                      <span className="float-right">5</span>
+                      <span className="float-right">{days}</span>
                       <br />
 
                       <span className="float-left">Miles Included:</span>
@@ -79,16 +105,13 @@ export default function Modal({ carData }) {
                     <div className="mb-3">
                       <span className="float-left">Rental Cost:</span>
                       <span className="float-right">
-                        ${(carData[currentCarIndex].per_day * 5).toFixed(2)}
+                        ${rentalCost.toFixed(2)}
                       </span>
                       <br />
 
                       <span className="float-left">Taxes and Fees:</span>
                       <span className="float-right">
-                        $
-                        {(carData[currentCarIndex].per_day * 5 * 0.532).toFixed(
-                          2
-                        )}
+                        ${taxesFees.toFixed(2)}
                       </span>
                       <br />
 
@@ -105,11 +128,7 @@ export default function Modal({ carData }) {
                     <div className="px-3 mb-3 -mx-3 text-2xl text-white bg-gray-600 rounded-md">
                       <span className="float-left">Sub-Total:</span>
                       <span className="float-right">
-                        $
-                        {(
-                          carData[currentCarIndex].per_day * 5 * 1.532 +
-                          65
-                        ).toFixed(2)}
+                        ${(rentalCost + taxesFees + 65).toFixed(2)}
                       </span>
                       <br />
                     </div>
@@ -122,10 +141,7 @@ export default function Modal({ carData }) {
                     <div className="px-3 mb-3 -mx-3 text-3xl text-white bg-blue-400 rounded-md">
                       <span className="float-left">Total Cost:</span>
                       <span className="float-right">
-                        $
-                        {(carData[currentCarIndex].per_day * 5 * 1.532).toFixed(
-                          2
-                        )}
+                        ${(rentalCost + taxesFees).toFixed(2)}
                       </span>
                       <br />
                     </div>
@@ -147,7 +163,16 @@ export default function Modal({ carData }) {
                     type="button"
                     onClick={() => {
                       setShowModal(false);
-                      navigate("/reservation");
+                      navigate(`/reservation`, {
+                        state: {
+                          id: carData[currentCarIndex].id,
+                          days: days,
+                          startDate: startDate,
+                          endDate: endDate,
+                          rentalCost: rentalCost,
+                          taxesFees: taxesFees,
+                        },
+                      });
                     }}
                   >
                     Book this trip
