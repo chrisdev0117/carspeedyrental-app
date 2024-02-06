@@ -29,7 +29,7 @@ export default function CarTable({ carData }) {
             Search
           </label>
           <div className="relative pr-10">
-            <div className="absolute inset-y-0 flex items-center pointer-events-none start-0 ps-3">
+            <div className="absolute inset-y-0 flex items-center hidden pointer-events-none start-0 ps-3">
               <svg
                 className="w-4 h-4 text-gray-500 dark:text-gray-400"
                 aria-hidden="true"
@@ -49,7 +49,7 @@ export default function CarTable({ carData }) {
             <input
               type="text"
               id="table-search-cars"
-              className="block py-2 text-sm text-gray-900 border border-blue-300 rounded-lg ps-10 w-80 bg-gray-50 focus:ring-blue-500 focus:border-blue-500 "
+              className="hidden py-2 text-sm text-gray-900 border border-blue-300 rounded-lg ps-10 w-80 bg-gray-50 focus:ring-blue-500 focus:border-blue-500 "
               placeholder="Search for cars"
             />
           </div>

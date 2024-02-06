@@ -120,10 +120,13 @@ export default function Home({ carData, sectionref }) {
               </div>
             </div>
             <div className="justify-center">
-              <button className="w-4/5 mt-2 mb-3 rounded-md bg-blue-600 px-3 py-1.5 text-lg text-white shadow-sm hover:bg-blue-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-600">
+              <a
+                href="tel:8015734248"
+                className="w-4/5 px-3 py-4 mt-2 mb-6 text-lg text-white bg-blue-600 rounded-md shadow-sm hover:bg-blue-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-600"
+              >
                 Call us At: 801-573-4248
-              </button>
-              <h4 className="font-extrabold text-red-600">
+              </a>
+              <h4 className="mt-5 font-extrabold text-red-600">
                 Minimum of 4 Days Rental required
               </h4>
             </div>

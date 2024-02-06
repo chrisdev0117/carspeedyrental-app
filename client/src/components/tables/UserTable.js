@@ -6,7 +6,7 @@ export default function UserTable({ userData }) {
       <div className="relative overflow-x-auto shadow-md sm:rounded-lg">
         <div className="flex flex-col justify-between">
           <div className="flex-col flex-wrap items-center px-5 py-4 space-y-4 bg-white md:flex-row md:space-y-0">
-            <div className="relative">
+            <div className="relative hidden">
               <div className="absolute inset-y-0 flex items-center pointer-events-none start-0 ps-3">
                 <svg
                   className="w-4 h-4 text-gray-500 dark:text-gray-400"
@@ -27,7 +27,7 @@ export default function UserTable({ userData }) {
               <input
                 type="text"
                 id="table-search-users"
-                className="block py-2 text-sm text-gray-900 border border-blue-300 rounded-lg ps-10 w-80 bg-gray-50 focus:ring-blue-500 focus:border-blue-500 "
+                className="hidden py-2 text-sm text-gray-900 border border-blue-300 rounded-lg ps-10 w-80 bg-gray-50 focus:ring-blue-500 focus:border-blue-500 "
                 placeholder="Search for users"
               />
             </div>

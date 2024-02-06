@@ -1,3 +1,4 @@
+import { FaFontAwesome, FaMale, FaUser } from "react-icons/fa";
 import AuthService from "../../services/auth.service";
 import CarService from "../../services/car.service";
 import Card from "../common/Card";
@@ -22,9 +23,9 @@ export default function Statistics() {
   });
   return (
     <div className="flex justify-around max-w-5xl py-10 mx-auto">
-      <Card count={totalUsers} title={"Total users"} />
-      <Card count={totalCars} title={"Total cars"} />
-      <Card count={totalOrders} title={"Total orders"} />
+      <Card count={totalUsers} title={"Total users"} type={1} />
+      <Card count={totalCars} title={"Total cars"} type={2} />
+      <Card count={totalOrders} title={"Total orders"} type={3} />
     </div>
   );
 }

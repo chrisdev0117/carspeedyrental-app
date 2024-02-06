@@ -38,6 +38,7 @@ export default function SignIn() {
           error.message ||
           error.toString();
         console.log(resMessage);
+        alert("Email or password are incorrect!");
       }
     );
   };

@@ -2,6 +2,7 @@ import React, { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import CarService from "../../services/car.service";
 import { useState } from "react";
+import AuthService from "../../services/auth.service";
 
 export default function RentalCarModal({ startDate, endDate }) {
   const [showModal, setShowModal] = React.useState(false);
@@ -162,17 +163,19 @@ export default function RentalCarModal({ startDate, endDate }) {
                     className="px-6 py-3 mb-1 mr-1 text-sm font-bold text-white uppercase transition-all duration-150 ease-linear rounded shadow outline-none bg-emerald-500 active:bg-emerald-600 hover:shadow-lg focus:outline-none"
                     type="button"
                     onClick={() => {
-                      setShowModal(false);
-                      navigate(`/reservation`, {
-                        state: {
-                          id: carData[currentCarIndex].id,
-                          days: days,
-                          startDate: startDate,
-                          endDate: endDate,
-                          rentalCost: rentalCost,
-                          taxesFees: taxesFees,
-                        },
-                      });
+                      if (AuthService.getCurrentUser()) {
+                        setShowModal(false);
+                        navigate(`/reservation`, {
+                          state: {
+                            id: carData[currentCarIndex].id,
+                            days: days,
+                            startDate: startDate,
+                            endDate: endDate,
+                            rentalCost: rentalCost,
+                            taxesFees: taxesFees,
+                          },
+                        });
+                      } else alert("Login first!");
                     }}
                   >
                     Book this trip
