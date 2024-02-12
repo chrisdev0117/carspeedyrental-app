@@ -20,7 +20,7 @@ export default function Home({ carData, sectionref }) {
       <div
         id="booking-section"
         style={{
-          backgroundImage: `url("http://localhost:8000/api/v1/car/file/background.png")`,
+          backgroundImage: `url("http://35.173.248.65/api/v1/car/file/background.png")`,
         }}
         className="px-4 bg-blue-100 py-11"
         ref={sectionref}
@@ -104,7 +104,7 @@ export default function Home({ carData, sectionref }) {
             <div className="flex justify-center px-5 mx-auto mb-5 gap-7">
               <div>
                 <img
-                  src="http://localhost:8000/api/v1/car/file/long_term.png"
+                  src="http://35.173.248.65/api/v1/car/file/long_term.png"
                   alt="long term"
                   className="mb-5 size-36"
                 />
@@ -112,7 +112,7 @@ export default function Home({ carData, sectionref }) {
               </div>
               <div>
                 <img
-                  src="http://localhost:8000/api/v1/car/file/daily.png"
+                  src="http://35.173.248.65/api/v1/car/file/daily.png"
                   alt="daily"
                   className="mb-5 size-36"
                 />

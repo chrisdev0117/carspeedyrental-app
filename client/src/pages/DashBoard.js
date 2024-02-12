@@ -25,7 +25,7 @@ export default function DashBoard({
   const onPageChange = (page) => setCurrentPage(page);
   const fetchCars = async (pageIndex) => {
     const response = await fetch(
-      `http://localhost:8000/api/v1/car/all?page=${currentPage}&size=10`
+      `http://35.173.248.65/api/v1/car/all?page=${currentPage}&size=10`
     );
     const cars = await response.json();
     setCarData(cars.items);

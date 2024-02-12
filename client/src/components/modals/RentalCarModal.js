@@ -19,7 +19,7 @@ export default function RentalCarModal({ startDate, endDate }) {
     //setCarData(CarService.getAllCars().json());
     console.log("here");
     const fetchCars = async () => {
-      const response = await fetch(`http://localhost:8000/api/v1/car/allcars`);
+      const response = await fetch(`http://35.173.248.65/api/v1/car/allcars`);
       const cars = await response.json();
       setCarData(cars);
       console.log(cars);
@@ -77,7 +77,7 @@ export default function RentalCarModal({ startDate, endDate }) {
                         </span>
                         <img
                           src={
-                            "http://localhost:8000/api/v1/car/file/" +
+                            "http://35.173.248.65/api/v1/car/file/" +
                             car.img_path
                           }
                           alt={car.carname}

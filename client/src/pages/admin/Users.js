@@ -16,7 +16,7 @@ export default function UsersPage() {
 
   const fetchUsers = async (pageIndex) => {
     const response = await fetch(
-      `http://localhost:8000/api/v1/auth/all?page=${pageIndex}&size=10`
+      `http://35.173.248.65/api/v1/auth/all?page=${pageIndex}&size=10`
     );
     const users = await response.json();
     setUserData(users.items);

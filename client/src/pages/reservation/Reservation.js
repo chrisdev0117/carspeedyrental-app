@@ -48,7 +48,7 @@ function ReservationPage({
   useEffect(() => {
     const fetchCar = async () => {
       const response = await fetch(
-        `http://localhost:8000/api/v1/car/get/${currentCarId}`
+        `http://35.173.248.65/api/v1/car/get/${currentCarId}`
       );
       const car = await response.json();
       setCurrentCar(car);
@@ -69,7 +69,7 @@ function ReservationPage({
     console.log(rentalCost + taxesFees);
     console.log(startDate);
     const { data } = await axios.post(
-      "http://localhost:8000/api/v1/car/reservate",
+      "http://35.173.248.65/api/v1/car/reservate",
       {
         amount: Math.round((rentalCost + taxesFees) * 100),
         carId: currentCar.id,
@@ -114,7 +114,7 @@ function ReservationPage({
           <img
             src={
               currentCar &&
-              `http://localhost:8000/api/v1/car/file/${currentCar.img_path}`
+              `http://35.173.248.65/api/v1/car/file/${currentCar.img_path}`
             }
             alt="asdf"
             className="mx-auto my-3 w-28"
@@ -283,7 +283,7 @@ function ReservationPage({
             {" "}
             I agree{" "}
             <a
-              href="http://localhost:8000/api/v1/car/file/terms&conditions.pdf"
+              href="http://35.173.248.65/api/v1/car/file/terms&conditions.pdf"
               target="_blank"
               rel="noreferrer"
               className="underline"

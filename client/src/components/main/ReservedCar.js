@@ -7,7 +7,7 @@ export default function ReservedCar() {
       <p className="my-3">Nissan Versa Note</p>
       <p className="my-3">Or Similar</p>
       <img
-        src="http://localhost:8000/api/v1/car/file/123123123.png"
+        src="http://35.173.248.65/api/v1/car/file/123123123.png"
         alt="asdf"
         className="mx-auto my-3 w-28"
       />

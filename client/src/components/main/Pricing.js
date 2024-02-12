@@ -45,7 +45,7 @@ export default function Pricing({ carData, sectionref }) {
             <div className="table-row-group" key={index}>
               <div className="table-cell p-4 border-b-2 border-gray-400">
                 <img
-                  src={`http://localhost:8000/api/v1/car/file/${car.img_path}`}
+                  src={`http://35.173.248.65/api/v1/car/file/${car.img_path}`}
                   alt={car.carname}
                   className="w-[200px] h-[131px]"
                 />

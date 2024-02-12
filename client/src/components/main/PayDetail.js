@@ -61,7 +61,7 @@ export default function PayDetail() {
           {" "}
           I agree{" "}
           <a
-            href="http://localhost:8000/api/v1/car/file/terms&conditions.pdf"
+            href="http://35.173.248.65/api/v1/car/file/terms&conditions.pdf"
             target="_blank"
             rel="noreferrer"
             className="underline"

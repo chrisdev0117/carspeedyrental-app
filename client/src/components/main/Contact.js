@@ -11,7 +11,7 @@ export default function Contact({ sectionref }) {
         </h2>
         <p className="mb-4 text-gray-500 ">
           <a
-            href="http://localhost:8000/api/v1/car/file/terms&conditions.pdf"
+            href="http://35.173.248.65/api/v1/car/file/terms&conditions.pdf"
             target="_blank"
           >
             Terms and Conditions.

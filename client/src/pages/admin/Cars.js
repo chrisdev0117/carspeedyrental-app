@@ -15,7 +15,7 @@ export default function CarsPage() {
   const [total, setTotal] = useState(0);
   const fetchCars = async (currentPage) => {
     const response = await fetch(
-      `http://localhost:8000/api/v1/car/all?page=${currentPage}&size=10`
+      `http://35.173.248.65/api/v1/car/all?page=${currentPage}&size=10`
     );
     const cars = await response.json();
     setCarData(cars.items);

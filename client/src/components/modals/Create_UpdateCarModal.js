@@ -32,7 +32,7 @@ export default function Create_UpdateCarModal({
     formData.append("per_10days", per_10days);
     formData.append("per_day", per_day);
     if (typeof file !== typeof {}) {
-      const url = `http://localhost:8000/api/v1/car/file/${file}`;
+      const url = `http://35.173.248.65/api/v1/car/file/${file}`;
       fetch(url).then(async (response) => {
         const contentType = response.headers.get("content-type");
         const blob = await response.blob();
@@ -43,7 +43,7 @@ export default function Create_UpdateCarModal({
     formData.append("carimg", file);
 
     if (default_button_text === "Add") {
-      await fetch("http://localhost:8000/api/v1/car/create", {
+      await fetch("http://35.173.248.65/api/v1/car/create", {
         method: "post",
         body: formData,
       })
@@ -51,7 +51,7 @@ export default function Create_UpdateCarModal({
         .catch((err) => console.error(err));
     } else {
       formData.append("id", default_id);
-      await fetch("http://localhost:8000/api/v1/car/update", {
+      await fetch("http://35.173.248.65/api/v1/car/update", {
         method: "post",
         body: formData,
       })
@@ -146,8 +146,8 @@ export default function Create_UpdateCarModal({
                         typeof file === typeof {}
                           ? URL.createObjectURL(file)
                           : file
-                          ? `http://localhost:8000/api/v1/car/file/${file}`
-                          : "http://localhost:8000/api/v1/car/file/original.png"
+                          ? `http://35.173.248.65/api/v1/car/file/${file}`
+                          : "http://35.173.248.65/api/v1/car/file/original.png"
                       }
                       alt="sdf"
                       className="object-contain w-full m-2 aspect-square"

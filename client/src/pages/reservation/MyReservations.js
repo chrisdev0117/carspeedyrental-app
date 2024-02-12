@@ -6,7 +6,7 @@ export default function MyReservationsPage({ currentUser }) {
   const [reservations, setReservations] = useState([]);
   const fetchReservations = async (user) => {
     const response = await fetch(
-      `http://localhost:8000/api/v1/auth/reservation?email=${user.email}`
+      `http://35.173.248.65/api/v1/auth/reservation?email=${user.email}`
     );
     const me = await response.json();
     console.log("aaaaaaaaaaaaaa");

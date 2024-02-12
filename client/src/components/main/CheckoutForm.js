@@ -16,7 +16,7 @@ const CheckoutForm = () => {
     // Call your backend to create the PaymentIntent
     console.log("1111111");
     const { data } = await axios.post(
-      "http://localhost:8000/api/v1/car/reservate",
+      "http://35.173.248.65/api/v1/car/reservate",
       {
         amount: 1000,
       }

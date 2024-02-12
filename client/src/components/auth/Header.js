@@ -7,9 +7,10 @@ export default function Header({ type }) {
   return (
     <div className="mt-24">
       <div className="flex justify-center">
+        {console.log(process.env)}
         <img
-          src="http://localhost:8000/api/v1/car/file/background.png"
-          alt="Car"
+          src={"http://35.173.248.65/api/v1/car/file/background.png"}
+          alt={"Car"}
           className="h-36"
         />
       </div>

@@ -126,7 +126,7 @@ export default function CarTable({ carData }) {
                 >
                   <img
                     className="h-10 rounded-full max-w-20"
-                    src={`http://localhost:8000/api/v1/car/file/${car.img_path}`}
+                    src={`http://35.173.248.65/api/v1/car/file/${car.img_path}`}
                     alt="Jese"
                   />
                   <div className="absolute pl-16">
